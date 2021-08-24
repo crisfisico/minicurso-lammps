@@ -1,0 +1,56 @@
+units           real
+atom_style      full
+boundary        p p p
+
+# campo de força
+pair_style      lj/cut 12.500
+bond_style      harmonic
+angle_style     fourier
+
+pair_modify     tail yes mix arithmetic
+special_bonds   lj/coul 0.0 0.0 1.0
+
+# lendo as infos da molecula
+read_data       data.H2O
+
+thermo 1 # freq de calculo das props dinamicas
+
+#otimiza a geometria (minimizando a energia)
+#dump dump.min all custom 1 dump.min.lammpstrj id type  x y z
+#minimize 1.0e-4 1.0e-6 100 1000
+#reset_timestep 0
+#undump dump.min
+
+#ensemble NVE 
+# explicar o que eh o ensemble, variar temp
+#dump dump.nve all custom 1 dump.nve.lammpstrj id type  x y z
+#velocity   all create 300 54654 mom yes rot yes # mom,rot zeram os momentos
+#fix        mynve all nve
+#run 100
+#reset_timestep 0
+#undump dump.nve
+
+#ensemble NVT
+# explicar o que eh o ensemble, variar temp
+#dump dump.nvt all custom 1 dump.nvt.lammpstrj id type  x y z
+#velocity   all create 300 54654 mom yes rot yes
+#fix        mynvt all nvt temp 10 10 100
+#run 100
+#reset_timestep 0
+#undump dump.nvt
+
+#ensemble NPT
+# explicar o que eh o ensemble, variar temp
+dump dump.npt all custom 1 dump.npt.lammpstrj id type  x y z
+velocity   all create 300 54654
+fix        mynvt all npt temp 300 300 100 aniso 0.0 0.0 1000
+run 100
+#reset_timestep 0
+#undump dump.npt
+
+# definir variaveis
+# variable temp equal 300
+# variable dt equal 1.0
+# variable tdamp equal ${temp}*${dt}
+
+

@@ -1,0 +1,11 @@
+REMARK   1 PDB file created by Lammps intervace v.0
+REMARK   2 Created on Tuesday 24 August 2021
+CRYST1   30.000   30.000   30.000  90.00  90.00  90.00          P1   1
+ATOM      1   O0 MOL   2       6.285   7.867  15.000  1.00  0.00           O  
+ATOM      2   H1 MOL   2       7.255   7.867  15.000  1.00  0.00           H  
+ATOM      3   H2 MOL   2       5.962   8.440  15.713  1.00  0.00           H  
+   TER    4
+CONECT    1    2    3          
+CONECT    2    1               
+CONECT    3    1               
+END
